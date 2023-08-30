@@ -1,0 +1,18 @@
+  1 # Ive pinched some of this from the octocat:#
+  2 # https://gist.github.com/octocat/9257657   #
+  3 #############################################
+  4 
+  5 # vim swap files #
+  6 ##################
+  7 *.swp
+  8 
+  9 
+ 10 # OS generated files #
+ 11 ######################
+ 12 .DS_Store
+ 13 .DS_Store?
+ 14 ._*
+ 15 .Spotlight-V100
+ 16 .Trashes
+ 17 ehthumbs.db
+ 18 Thumbs.db

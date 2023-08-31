@@ -38,11 +38,14 @@ jobs:
             sudo apt-get update
             # Install PowerShell
             sudo apt-get install -y powershell
-
-        - run: |
+        - name: echo the variables
+          run: |
             echo "Thing Type: $TYPE"
             echo "Thing Name: $NAME"
           env:
             TYPE: ${{ inputs.thingtype }}
             NAME: ${{ inputs.thingname }}
+        - name: run the powershell script we checked out
+          run: |
+            pwsh helloworld.ps1
 

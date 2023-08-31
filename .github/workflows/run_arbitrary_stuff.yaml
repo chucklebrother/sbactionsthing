@@ -1,35 +1,48 @@
 name: Run Arbitrary Stuff
-run-name: ${{ github.actor }} is trunning some old BS
+run-name: ${{ github.actor }} is running some old BS
 on:
     workflow_dispatch:
       inputs:
-        logLevel:
-          description: 'Log level'
+        thingtype:
+          description: 'Thing Type'
           required: true
-          default: 'warning'
+          default: 'Normal'
           type: choice
           options:
-          - info
-          - warning
-          - debug
-        tags:
-          description: 'Test scenario tags'
-          required: false
-          type: boolean
-        environment:
-          description: 'Environment to run tests against'
-          type: environment
+          - Normal
+          - Expensive
+        thingname:
+          description: 'Thing Name'
           required: true
-
+          type: string
+        
 jobs:
     log-the-inputs:
       runs-on: ubuntu-latest
       steps:
+        - name: Check out repository code
+          uses: actions/checkout@v3
+        - name: Install Powershell
+          run: |
+            # Update the list of packages
+            sudo apt-get update
+            # Install pre-requisite packages.
+            sudo apt-get install -y wget apt-transport-https software-properties-common
+            # Download the Microsoft repository GPG keys
+            wget -q "https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/packages-microsoft-prod.deb"
+            # Register the Microsoft repository GPG keys
+            sudo dpkg -i packages-microsoft-prod.deb
+            # Delete the the Microsoft repository GPG keys file
+            rm packages-microsoft-prod.deb
+            # Update the list of packages after we added packages.microsoft.com
+            sudo apt-get update
+            # Install PowerShell
+            sudo apt-get install -y powershell
+
         - run: |
-            echo "Log level: $LEVEL"
-            echo "Tags: $TAGS"
-            echo "Environment: $ENVIRONMENT"
+            echo "Thing Type: $TYPE"
+            echo "Thing Name: $NAME"
           env:
-            LEVEL: ${{ inputs.logLevel }}
-            TAGS: ${{ inputs.tags }}
-            ENVIRONMENT: ${{ inputs.environment }}
+            TYPE: ${{ inputs.thingtype }}
+            NAME: ${{ inputs.thingname }}
+

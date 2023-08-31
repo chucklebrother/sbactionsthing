@@ -42,10 +42,12 @@ jobs:
           run: |
             echo "Thing Type: $TYPE"
             echo "Thing Name: $NAME"
+            echo "Secret: $SECRET"
           env:
             TYPE: ${{ inputs.thingtype }}
             NAME: ${{ inputs.thingname }}
+            SECRET: ${{ secrets.MYSUPERSECRETTHING }}
         - name: run the powershell script we checked out
           run: |
-            pwsh helloworld.ps1
+            pwsh helloworld.ps1 | tee ./helloworld.txt
 

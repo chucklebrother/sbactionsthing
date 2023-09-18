@@ -50,7 +50,7 @@ jobs:
         - name: run the powershell script we checked out
           run: |
             STRING="-lovinit.txt"
-            pwsh helloworld.ps1 | tee "./$NAME-helloworld.txt"
+            pwsh helloworld.ps1 | tee "./$STRING"
             ls -alh ./
         - uses: actions/upload-artifact@v3
           with:

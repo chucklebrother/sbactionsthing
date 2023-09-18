@@ -49,9 +49,9 @@ jobs:
             SECRET: ${{ secrets.MYSUPERSECRETTHING }}
         - name: run the powershell script we checked out
           run: |
-            pwsh helloworld.ps1 | tee ./helloworld.txt
+            pwsh helloworld.ps1 | tee ./"$NAME"-helloworld.txt
         - uses: actions/upload-artifact@v3
           with:
               name: my-artifact-${{ inputs.thingname }}
-              path: ./helloworld.txt
+              path: ./"$NAME"-helloworld.txt
 

@@ -49,12 +49,13 @@ jobs:
             SECRET: ${{ secrets.MYSUPERSECRETTHING }}
         - name: run the powershell script we checked out
           run: |
-            STRING="-lovinit.txt"
-            echo "$STRING"
-            pwsh helloworld.ps1 | tee "./$STRING"
-            ls -alh ./
+              pwsh helloworld.ps1 | tee "./thing-build-$NAME.txt"
+          env:
+            TYPE: ${{ inputs.thingtype }}
+            NAME: ${{ inputs.thingname }}
+            SECRET: ${{ secrets.MYSUPERSECRETTHING }}
         - uses: actions/upload-artifact@v3
           with:
               name: my-artifact-${{ inputs.thingname }}
-              path: ./${{ inputs.thingname }}-helloworld.txt
+              path: ./thing-build-${{ inputs.thingname }}.txt
 

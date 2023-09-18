@@ -49,6 +49,7 @@ jobs:
             SECRET: ${{ secrets.MYSUPERSECRETTHING }}
         - name: run the powershell script we checked out
           run: |
+            STRING="-lovinit.txt"
             pwsh helloworld.ps1 | tee "./$NAME-helloworld.txt"
             ls -alh ./
         - uses: actions/upload-artifact@v3

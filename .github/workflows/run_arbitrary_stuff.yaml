@@ -50,4 +50,8 @@ jobs:
         - name: run the powershell script we checked out
           run: |
             pwsh helloworld.ps1 | tee ./helloworld.txt
+        - uses: actions/upload-artifact@v3
+          with:
+              name: my-artifact
+              path: ./helloworld.txt
 
